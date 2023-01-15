@@ -47,10 +47,18 @@ public class Server {
                 out.flush();
                 return;
             }
+
+            printRequestInfo(request);
+
             handler.handle(request, out);
         } catch (IOException | URISyntaxException exception) {
             exception.printStackTrace();
         }
+    }
+
+    private void printRequestInfo(Request request) {
+        System.out.println(request.getQueryList());
+        System.out.println(request.getQueryParam("name"));
     }
 
     public void addHandler(String methodAndPath, Handler handler) {
